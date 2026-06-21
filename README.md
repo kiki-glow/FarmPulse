@@ -240,4 +240,4 @@ farmpulse/
 
 ## Author
 
-**Glory** — [github.com/kiki-glow](https://github.com/kiki-glow)
+**Kinya** — [github.com/kiki-glow](https://github.com/kiki-glow)
