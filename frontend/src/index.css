@@ -529,6 +529,7 @@ body {
   gap: 0.35rem;
   padding: 2.5rem 1rem;
   text-align: center;
+  min-height: 250px;
 }
 .upload-icon { color: var(--green-500); margin-bottom: 0.25rem; }
 .upload-label { font-size: 0.9rem; font-weight: 500; color: var(--text); }

@@ -52,7 +52,7 @@ const TreeAnalysisPanel = ({ onResult, treeData, farmLat, farmLon }) => {
             ) : (
                 <div className="upload_placeholder" onClick={() => fileRef.current.click()}>
                     <span><Send size={16} /></span>
-                    <span>Drop farm image or click to browser</span>
+                    <span>Drop farm image or click to browse</span>
                     <span className="upload-hint">JPEG · PNG · WEBP · max 20MB</span>
                 </div>
             )}
