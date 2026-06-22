@@ -6,8 +6,8 @@ FarmPulse combines real-time weather forecasting with AI-powered tree canopy ana
 
 Built as a technical assessment integrating the [WeatherAI API](https://weather-ai.co/docs).
 
-**Live demo:** [farmpulse.netlify.app](https://farmpulse.netlify.app) <!-- update after deploy -->  
-**Backend:** [farmpulse-api.onrender.com](https://farmpulse-api.onrender.com)
+**Live demo:** [farmpulse-1.onrender.com](https://farmpulse-1.onrender.com) <!-- update after deploy -->  
+**Backend:** [farmpulse-l2c0.onrender.com](https://farmpulse-l2c0.onrender.com)
 
 ---
 
