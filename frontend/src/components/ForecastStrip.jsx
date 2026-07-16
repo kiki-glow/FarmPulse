@@ -1,3 +1,4 @@
+import { Calendar } from "lucide-react";
 import { getWeatherIcon } from "../utils/weatherIcon";
 
 const ForecastStrip = ({ daily }) => {
@@ -10,7 +11,7 @@ const ForecastStrip = ({ daily }) => {
 
   return (
     <div className="card forecast-strip">
-        <h3>📅 7-Day Forecast</h3>
+        <h3><Calendar size={18} style={{display: 'inline-block', marginRight: '0.5rem'}} /> 7-Day Forecast</h3>
         <div className="forecast-days">
             {daily.map((day) => (
                 <div key={day.date} className="forecast-day">

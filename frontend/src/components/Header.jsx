@@ -9,7 +9,7 @@ const Header = () => {
             </span>
             <span className="logo-text">FarmPulse</span>
         </div>
-        <p className="tagline">🌍 Weather Intelligence for East African Farms</p>
+        <p className="tagline">Weather Intelligence for East African Farms</p>
     </header>
   )
 }

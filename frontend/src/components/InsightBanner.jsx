@@ -1,5 +1,4 @@
-import { CloudRain, Wind, Sun } from "lucide-react";
-import { FaSeedling } from "react-icons/fa";
+import { CloudRain, Wind, Sun, Sprout } from "lucide-react";
 import { LuSparkle } from "react-icons/lu";
 
 const InsightBanner = ({ weather, treeData }) => {
@@ -11,21 +10,21 @@ const InsightBanner = ({ weather, treeData }) => {
 
     if (rainyDays.length > 0 && treesNeedingCare > 0) {
         insights.push({
-            icon: '🌧️',
+            icon: <CloudRain size={18} />,
             text: `Rain expected on ${rainyDays.length} day(s) – good time to treat the ${treesNeedingCare} trees needing care while soil moisture is high.`
         });
     }
 
     if (treesNeedingReplacement > 0 && rainyDays.length > 0) {
         insights.push({
-            icon: '🌱',
+            icon: <Sprout size={18} />,
             text: `${treesNeedingReplacement} trees flagged for replacement – upcoming rain creates ideal replanting conditions.`
         });
     }
 
     if (rainyDays.length === 0 && treesNeedingCare > 0) {
         insights.push({
-            icon: '☀️',
+            icon: <Sun size={18} />,
             text: `Dry week ahead – consider irrigating the ${treesNeedingCare} trees flagged as needing care.`
         });
     }
@@ -34,7 +33,7 @@ const InsightBanner = ({ weather, treeData }) => {
     if (highWind) {
         const windDate = new Date(highWind.date).toLocaleDateString('en-KE', { weekday: 'short' });
         insights.push({
-            icon: '💨',
+            icon: <Wind size={18} />,
             text: `High winds forecast (${highWind.wind_gust} km/h on ${windDate}) – check tree stability, especially in exposed areas.`
         });
     }
@@ -52,7 +51,7 @@ const InsightBanner = ({ weather, treeData }) => {
         <ul className="insights-list">
             {insights.map((insight, i) => (
                 <li key={i}>
-                    <span>{insight.icon}</span> {insight.text}
+                    <span className="insight-icon-item">{insight.icon}</span> {insight.text}
                 </li>
             ))}
         </ul>

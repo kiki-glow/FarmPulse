@@ -1,6 +1,6 @@
 import { useState, useRef } from "react"
 import { analyzeTrees } from "../api/farmpulse.js"
-import { Send, Search, X } from "lucide-react";
+import { Send, Search, X, Leaf, Trees, Crosshair, Lightbulb, Clipboard } from "lucide-react";
 
 const TreeAnalysisPanel = ({ onResult, treeData, farmLat, farmLon }) => {
     const [loading, setLoading] = useState(false);
@@ -45,7 +45,7 @@ const TreeAnalysisPanel = ({ onResult, treeData, farmLat, farmLon }) => {
   return (
     <div className="card tree-panel">
         <div className="card-header">
-            <h2>🔬 Farm Tree Analysis</h2>
+            <h2><Leaf size={20} style={{display: 'inline-block', marginRight: '0.5rem'}} /> Farm Tree Analysis</h2>
             <span className="badge-pro">CV + AI</span>
         </div>
         <p className="panel-description">
@@ -105,17 +105,17 @@ const TreeAnalysisPanel = ({ onResult, treeData, farmLat, farmLon }) => {
             <div className="tree-results">
                 <div className="tree-stats">
                     <div className="tree-stat">
-                        <span className="tree-stat-value">🌳</span>
+                        <span className="tree-stat-icon"><Trees size={28} /></span>
                         <span className="tree-stat-value">{treeData.total_tree_count}</span>
                         <span className="tree-stat-label">Trees</span>
                     </div>
                     <div className="tree-stat">
-                        <span className="tree-stat-value">🌲</span>
+                        <span className="tree-stat-icon"><Trees size={28} /></span>
                         <span className="tree-stat-value">{treeData.canopy_coverage_pct}%</span>
                         <span className="tree-stat-label">Canopy Cover</span>
                     </div>
                     <div className="tree-stat">
-                        <span className="tree-stat-value">🎯</span>
+                        <span className="tree-stat-icon"><Crosshair size={28} /></span>
                         <span className="tree-stat-value">
                             {Math.round(treeData.confidence_score * 100)}%
                         </span>
@@ -143,7 +143,7 @@ const TreeAnalysisPanel = ({ onResult, treeData, farmLat, farmLon }) => {
 
                 {treeData.recommendations?.length > 0 && (
                     <div className="recommendations">
-                        <h4>💡 Recommendations</h4>
+                        <h4><Lightbulb size={18} style={{display: 'inline-block', marginRight: '0.5rem'}} /> Recommendations</h4>
                         <ul>
                             {treeData.recommendations.map((rec, i) => (
                                 <li key={i}>{rec}</li>
@@ -154,7 +154,7 @@ const TreeAnalysisPanel = ({ onResult, treeData, farmLat, farmLon }) => {
 
                 {treeData.overlay_image_url && (
                     <div className="overlay-image">
-                        <h4>📋 Annotated Overlay</h4>
+                        <h4><Clipboard size={18} style={{display: 'inline-block', marginRight: '0.5rem'}} /> Annotated Overlay</h4>
                         <img src={treeData.overlay_image_url} alt="Tree analysis overlay" />
                     </div>
                 )}

@@ -1,4 +1,4 @@
-import { Pin, Sparkles } from "lucide-react";
+import { Pin, Sparkles, Droplets, Wind, Sun, Eye } from "lucide-react";
 import { getWeatherIcon } from "../utils/weatherIcon"
 
 const WeatherPanel = ({ weather }) => {
@@ -25,19 +25,19 @@ const WeatherPanel = ({ weather }) => {
         
         <div className="weather-stats">
             <div className="stat">
-                <span className="stat-label">💧 Humidity</span>
+                <span className="stat-label"><Droplets size={16} /> Humidity</span>
                 <span className="stat-value">{current.humidity}%</span>
             </div>
             <div className="stat">
-                <span className="stat-label">💨 Wind</span>
+                <span className="stat-label"><Wind size={16} /> Wind</span>
                 <span className="stat-value">{current.wind_speed} km/h</span>
             </div>
             <div className="stat">
-                <span className="stat-label">☀️ UV Index</span>
+                <span className="stat-label"><Sun size={16} /> UV Index</span>
                 <span className="stat-value">{current.uv_index}</span>
             </div>
             <div className="stat">
-                <span className="stat-label">🌪️ Gusts</span>
+                <span className="stat-label"><Eye size={16} /> Gusts</span>
                 <span className="stat-value">{current.wind_gust} km/h</span>
             </div>
         </div>
