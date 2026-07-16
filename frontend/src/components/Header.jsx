@@ -1,15 +1,15 @@
-import { LeafyGreen } from "lucide-react"
+import { Leaf } from "lucide-react"
 
 const Header = () => {
   return (
     <header className="app-header">
         <div className="logo">
             <span className="logo-icon">
-                <LeafyGreen size={16} />
+                <Leaf size={32} strokeWidth={1.5} />
             </span>
             <span className="logo-text">FarmPulse</span>
         </div>
-        <p className="tagline">Weather intelligence for East African farms</p>
+        <p className="tagline">🌍 Weather Intelligence for East African Farms</p>
     </header>
   )
 }

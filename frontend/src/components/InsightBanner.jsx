@@ -1,4 +1,4 @@
-import { CloudRain, Wind, SunIcon } from "lucide-react";
+import { CloudRain, Wind, Sun } from "lucide-react";
 import { FaSeedling } from "react-icons/fa";
 import { LuSparkle } from "react-icons/lu";
 
@@ -10,31 +10,37 @@ const InsightBanner = ({ weather, treeData }) => {
     const treesNeedingReplacement = treeData.tree_health?.needs_replacement || 0;
 
     if (rainyDays.length > 0 && treesNeedingCare > 0) {
-        insights.push(
-            `${<CloudRain size={18} />} Rain expected on ${rainyDays.length} day(s) – good time to treat the ${treesNeedingCare} trees needing care while soil moisture is high.`
-        );
+        insights.push({
+            icon: '🌧️',
+            text: `Rain expected on ${rainyDays.length} day(s) – good time to treat the ${treesNeedingCare} trees needing care while soil moisture is high.`
+        });
     }
 
     if (treesNeedingReplacement > 0 && rainyDays.length > 0) {
-        insights.push(
-            `${<FaSeedling size={18} />} ${treesNeedingReplacement} trees flagged for replacement – upcoming rain creates ideal replanting conditions.`
-        );
+        insights.push({
+            icon: '🌱',
+            text: `${treesNeedingReplacement} trees flagged for replacement – upcoming rain creates ideal replanting conditions.`
+        });
     }
 
     if (rainyDays.length === 0 && treesNeedingCare > 0) {
-        insights.push(
-            `${<SunIcon size={18} />} Dry week ahead – consider irrigating the ${treesNeedingCare} trees flagged as needing care.`
-        );
+        insights.push({
+            icon: '☀️',
+            text: `Dry week ahead – consider irrigating the ${treesNeedingCare} trees flagged as needing care.`
+        });
     }
 
-    const highWind = weather.daily?.find(d => d.wind_wax > 20);
+    const highWind = weather.daily?.find(d => d.wind_gust > 20);
     if (highWind) {
-        insights.push(
-            `${<Wind size={18} />} High winds forecast (${highWind.wind_wax} km/h on ${new Date(highWind.date).toLocaleDateString('en-KE', { weekday: 'short' })}) – check tree stability, especially flagged trees.`
-        );
+        const windDate = new Date(highWind.date).toLocaleDateString('en-KE', { weekday: 'short' });
+        insights.push({
+            icon: '💨',
+            text: `High winds forecast (${highWind.wind_gust} km/h on ${windDate}) – check tree stability, especially in exposed areas.`
+        });
     }
 
     if (insights.length === 0) return null;
+
   return (
     <div className="insight-banner">
         <div className="insight-header">
@@ -45,7 +51,9 @@ const InsightBanner = ({ weather, treeData }) => {
         </div>
         <ul className="insights-list">
             {insights.map((insight, i) => (
-                <li key={i}>{insight}</li>
+                <li key={i}>
+                    <span>{insight.icon}</span> {insight.text}
+                </li>
             ))}
         </ul>
     </div>

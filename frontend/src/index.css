@@ -8,29 +8,42 @@
   --green-900: #0d2b1a;
   --green-800: #1a4a2e;
   --green-700: #256638;
+  --green-600: #2d7a3f;
   --green-500: #3a9e5f;
+  --green-400: #5ab87a;
   --green-300: #7ecb9b;
   --green-100: #d4f0e0;
   --amber: #f5a623;
+  --amber-dark: #d98a1e;
   --red: #e05c5c;
+  --red-dark: #c73e3e;
+  --blue: #74b3e8;
   --bg: #0f1f14;
   --surface: #162b1e;
+  --surface-light: #1d3a26;
   --border: #1e3d28;
+  --border-light: #2a4d35;
   --text: #e8f5ee;
   --muted: #7aab8a;
   --radius: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   min-height: 100vh;
+  line-height: 1.5;
 }
 
 /* ── Layout ── */
 .app {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
 }
@@ -38,225 +51,390 @@ body {
 .app-header {
   text-align: center;
   margin-bottom: 2.5rem;
+  animation: fadeInDown 0.6s ease-out;
 }
 
 .logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 0.4rem;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
 }
 
 .logo-icon {
-  font-size: 1.8rem;
+  font-size: 2rem;
+  color: var(--green-500);
 }
 
 .logo-text {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--green-300);
-  letter-spacing: -0.5px;
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--green-300), var(--green-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.8px;
 }
 
 .tagline {
   color: var(--muted);
   font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.app-main {
+  animation: fadeInUp 0.6s ease-out 0.1s both;
 }
 
 .panels {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
   align-items: start;
 }
 
 .weather-column {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .panels {
     grid-template-columns: 1fr;
   }
 }
 
+/* ── Animations ── */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
 /* ── Location Section ── */
-.location-section {
-  margin-bottom: 1.5rem;
+.location-search {
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
 }
 
 .coord-form {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 
 .coord-form input {
   flex: 1;
-  min-width: 160px;
+  min-width: 200px;
   background: var(--surface);
   border: 1px solid var(--border);
   color: var(--text);
-  padding: 0.65rem 1rem;
+  padding: 0.8rem 1.1rem;
   border-radius: var(--radius);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.coord-form input::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
 }
 
 .coord-form input:focus {
   outline: none;
   border-color: var(--green-500);
+  background: var(--surface-light);
+  box-shadow: 0 0 0 3px rgba(58, 158, 95, 0.1);
 }
 
 .coord-form button,
 .auto-btn {
-  background: var(--green-700);
+  background: linear-gradient(135deg, var(--green-700), var(--green-600));
   color: var(--text);
   border: none;
-  padding: 0.65rem 1.25rem;
+  padding: 0.8rem 1.5rem;
   border-radius: var(--radius);
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: background 0.2s;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
 }
 
 .coord-form button:hover,
 .auto-btn:hover {
-  background: var(--green-500);
+  background: linear-gradient(135deg, var(--green-600), var(--green-500));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.coord-form button:active,
+.auto-btn:active {
+  transform: translateY(0);
 }
 
 .coord-form button:disabled,
 .auto-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  transform: none;
 }
 
 .auto-btn {
-  margin-top: 0.5rem;
   background: transparent;
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: none;
+}
+
+.auto-btn:hover {
+  background: rgba(58, 158, 95, 0.1);
+  border-color: var(--green-500);
 }
 
 .error {
   color: var(--red);
-  font-size: 0.85rem;
-  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.75rem;
+  animation: slideInLeft 0.3s ease-out;
 }
 
 /* ── Cards ── */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: var(--transition);
 }
 
 .card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  gap: 1rem;
 }
 
 .card-header h2 {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+/* Weather Panel Card */
+.weather-panel {
+  background: linear-gradient(135deg, var(--surface), rgba(58, 158, 95, 0.08));
+  border: 1px solid var(--green-700);
+  box-shadow: var(--shadow-md);
+}
+
+/* ── Location Tag ── */
+.location-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: rgba(58, 158, 95, 0.1);
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  margin-left: auto;
 }
 
 /* ── Weather Panel ── */
-.location-tag {
-  font-size: 0.75rem;
-  color: var(--muted);
-}
-
 .current-weather {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  animation: slideInLeft 0.5s ease-out;
 }
 
 .weather-icon-lg {
-  font-size: 3.5rem;
+  font-size: 4.5rem;
   line-height: 1;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.temp-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 .temperature {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--green-300);
+  font-size: 3.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--green-300), var(--green-100));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
 }
 
 .feels-like {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: var(--muted);
-  margin-top: 0.2rem;
+  font-weight: 500;
 }
 
 .weather-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0.5rem;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
 }
 
 .stat {
   background: var(--bg);
-  border-radius: 8px;
-  padding: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 0.75rem;
   text-align: center;
+  transition: var(--transition);
+}
+
+.stat:hover {
+  border-color: var(--green-500);
+  background: rgba(58, 158, 95, 0.05);
+  transform: translateY(-2px);
 }
 
 .stat-label {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--muted);
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 .stat-value {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--green-300);
+  letter-spacing: -0.3px;
 }
 
 .ai-summary {
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background: var(--bg);
-  border-radius: 8px;
+  margin-top: 1.25rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(58, 158, 95, 0.15), rgba(58, 158, 95, 0.05));
+  border-radius: var(--radius);
   border-left: 3px solid var(--green-500);
+  animation: slideInLeft 0.5s ease-out 0.2s both;
 }
 
 .ai-badge {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--green-500);
-  margin-bottom: 0.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--green-400);
+  margin-bottom: 0.6rem;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .ai-summary p {
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.5;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.6;
 }
 
 /* ── Forecast Strip ── */
+.forecast-strip {
+  animation: slideInLeft 0.5s ease-out 0.3s both;
+}
+
 .forecast-strip h3 {
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.2px;
 }
 
 .forecast-days {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.75rem;
   overflow-x: auto;
-  padding-bottom: 0.25rem;
+  overflow-y: hidden;
+  padding-bottom: 0.5rem;
+  scroll-behavior: smooth;
+}
+
+.forecast-days::-webkit-scrollbar {
+  height: 4px;
+}
+
+.forecast-days::-webkit-scrollbar-track {
+  background: var(--bg);
+  border-radius: 10px;
+}
+
+.forecast-days::-webkit-scrollbar-thumb {
+  background: var(--green-700);
+  border-radius: 10px;
+}
+
+.forecast-days::-webkit-scrollbar-thumb:hover {
+  background: var(--green-500);
 }
 
 .forecast-day {
@@ -264,297 +442,564 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
-  background: var(--bg);
-  border-radius: 8px;
-  padding: 0.6rem 0.75rem;
-  min-width: 72px;
+  justify-content: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, var(--surface), rgba(58, 158, 95, 0.05));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem 0.95rem;
+  min-width: 88px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.forecast-day:hover {
+  transform: translateY(-4px);
+  border-color: var(--green-500);
+  background: linear-gradient(135deg, var(--surface-light), rgba(58, 158, 95, 0.15));
+  box-shadow: 0 8px 24px rgba(58, 158, 95, 0.2);
 }
 
 .day-label {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.2px;
 }
 
 .weather-icon-md {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   line-height: 1;
 }
 
 .day-precip {
-  font-size: 0.7rem;
-  color: #74b3e8;
+  font-size: 0.75rem;
+  color: var(--blue);
+  font-weight: 600;
+  background: rgba(116, 179, 232, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
 }
 
 .day-range {
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text);
 }
 
 /* ── Tree Panel ── */
+.tree-panel {
+  background: linear-gradient(135deg, var(--surface), rgba(58, 158, 95, 0.08));
+  border: 1px solid var(--green-700);
+  box-shadow: var(--shadow-md);
+  animation: slideInLeft 0.5s ease-out 0.4s both;
+}
+
 .badge-pro {
-  font-size: 0.65rem;
-  background: var(--green-800);
+  font-size: 0.7rem;
+  background: linear-gradient(135deg, var(--green-800), var(--green-700));
   color: var(--green-300);
-  padding: 0.2rem 0.5rem;
+  padding: 0.35rem 0.75rem;
   border-radius: 20px;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-sm);
 }
 
 .panel-description {
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   color: var(--muted);
-  margin-bottom: 1rem;
-  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
 }
 
+/* ── Upload Area ── */
 .upload-area {
-  margin-bottom: 0.75rem;
+  border: 2px dashed var(--border-light);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 1rem;
+  background: var(--bg);
+}
+
+.upload-area:hover {
+  border-color: var(--green-500);
+  background: rgba(58, 158, 95, 0.05);
+}
+
+.upload-area.dragging {
+  border-color: var(--green-400);
+  background: rgba(58, 158, 95, 0.1);
+  box-shadow: inset 0 0 20px rgba(58, 158, 95, 0.1);
+}
+
+.upload-area.has-preview {
+  border-style: solid;
+  border-color: var(--green-700);
+  cursor: default;
+  background: transparent;
 }
 
 .upload-placeholder {
-  border: 2px dashed var(--border);
-  border-radius: var(--radius);
-  padding: 2rem;
-  text-align: center;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  color: var(--muted);
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+.upload-icon {
+  font-size: 2.5rem;
+  color: var(--green-500);
+}
+
+.upload-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+
+.upload-sub {
   font-size: 0.85rem;
-  transition: border-color 0.2s;
-}
-
-.upload-placeholder:hover {
-  border-color: var(--green-500);
-}
-
-.upload-placeholder span:first-child {
-  font-size: 2rem;
+  color: var(--muted);
 }
 
 .upload-hint {
-  font-size: 0.72rem;
-  color: var(--border);
+  font-size: 0.75rem;
+  color: var(--border-light);
+  margin-top: 0.25rem;
+}
+
+.preview-wrapper {
+  position: relative;
 }
 
 .image-preview {
   width: 100%;
-  border-radius: 8px;
-  max-height: 200px;
+  border-radius: calc(var(--radius-lg) - 2px);
+  max-height: 240px;
   object-fit: cover;
+  display: block;
+  animation: fadeInUp 0.4s ease-out;
 }
 
+.clear-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1.2rem;
+}
+
+.clear-btn:hover {
+  background: var(--red);
+  transform: scale(1.1);
+}
+
+/* ── Buttons ── */
 .analyze-btn {
   width: 100%;
-  background: var(--green-700);
+  background: linear-gradient(135deg, var(--green-700), var(--green-600));
   color: var(--text);
   border: none;
-  padding: 0.75rem;
+  padding: 0.95rem 1.5rem;
   border-radius: var(--radius);
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: background 0.2s;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: var(--transition);
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  box-shadow: var(--shadow-sm);
+  letter-spacing: -0.2px;
 }
 
 .analyze-btn:hover {
-  background: var(--green-500);
+  background: linear-gradient(135deg, var(--green-600), var(--green-500));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.analyze-btn:active {
+  transform: translateY(0);
 }
 
 .analyze-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
 }
 
+/* ── Tree Results ── */
 .tree-results {
-  margin-top: 0.5rem;
+  margin-top: 1rem;
+  animation: fadeInUp 0.5s ease-out;
 }
 
 .tree-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
 }
 
 .tree-stat {
-  background: var(--bg);
-  border-radius: 8px;
-  padding: 0.75rem;
+  background: linear-gradient(135deg, var(--bg), rgba(58, 158, 95, 0.08));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
   text-align: center;
+  transition: var(--transition);
+}
+
+.tree-stat:hover {
+  border-color: var(--green-500);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 .tree-stat-value {
   display: block;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--green-300);
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--green-300), var(--green-100));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.3rem;
 }
 
 .tree-stat-label {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
 }
 
 .health-breakdown {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .health-breakdown h4 {
-  font-size: 0.82rem;
-  color: var(--muted);
-  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 0.85rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+.health-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
 .health-item {
   display: flex;
   justify-content: space-between;
-  font-size: 0.82rem;
-  padding: 0.4rem 0.6rem;
-  border-radius: 6px;
-  margin-bottom: 0.3rem;
+  align-items: center;
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: var(--transition);
 }
 
 .health-item.healthy {
   background: rgba(58, 158, 95, 0.15);
   color: var(--green-300);
+  border: 1px solid rgba(58, 158, 95, 0.3);
+}
+
+.health-item.healthy:hover {
+  background: rgba(58, 158, 95, 0.25);
 }
 
 .health-item.needs-care {
   background: rgba(245, 166, 35, 0.15);
   color: var(--amber);
+  border: 1px solid rgba(245, 166, 35, 0.3);
+}
+
+.health-item.needs-care:hover {
+  background: rgba(245, 166, 35, 0.25);
 }
 
 .health-item.needs-replacement {
   background: rgba(224, 92, 92, 0.15);
   color: var(--red);
+  border: 1px solid rgba(224, 92, 92, 0.3);
+}
+
+.health-item.needs-replacement:hover {
+  background: rgba(224, 92, 92, 0.25);
+}
+
+.recommendations {
+  margin-bottom: 1.5rem;
 }
 
 .recommendations h4 {
-  font-size: 0.82rem;
-  color: var(--muted);
-  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 0.85rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
 }
 
 .recommendations ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.6rem;
 }
 
 .recommendations li {
-  font-size: 0.82rem;
-  line-height: 1.4;
-  padding: 0.5rem 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding: 0.85rem 1rem;
   background: var(--bg);
-  border-radius: 6px;
-  border-left: 2px solid var(--green-500);
+  border-radius: var(--radius);
+  border-left: 3px solid var(--green-500);
+  transition: var(--transition);
+}
+
+.recommendations li:hover {
+  border-left-color: var(--green-300);
+  background: rgba(58, 158, 95, 0.05);
+  transform: translateX(4px);
 }
 
 .overlay-image {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  animation: fadeInUp 0.6s ease-out;
 }
 
 .overlay-image h4 {
-  font-size: 0.82rem;
-  color: var(--muted);
-  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 0.85rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
 }
 
 .overlay-image img {
   width: 100%;
-  border-radius: 8px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
 }
 
 /* ── Insight Banner ── */
 .insight-banner {
-  background: linear-gradient(135deg, var(--green-900), var(--surface));
-  border: 1px solid var(--green-700);
-  border-radius: var(--radius);
-  padding: 1rem 1.25rem;
-  margin-bottom: 1.25rem;
+  background: linear-gradient(135deg, rgba(13, 43, 26, 0.8), rgba(22, 43, 30, 0.6));
+  border: 1.5px solid var(--green-700);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-md);
+  animation: slideInLeft 0.5s ease-out;
+  backdrop-filter: blur(10px);
 }
 
 .insight-header {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8rem;
-  font-weight: 700;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 800;
   color: var(--green-300);
-  letter-spacing: 0.5px;
-  margin-bottom: 0.6rem;
+  letter-spacing: 0.8px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
 }
 
-.insight-list {
+.insight-icon {
+  font-size: 1.2rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.insights-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.85rem;
 }
 
-.insight-list li {
-  font-size: 0.85rem;
+.insights-list li {
+  font-size: 0.95rem;
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.7;
+  padding: 0.85rem 1rem;
+  background: rgba(58, 158, 95, 0.1);
+  border-left: 3px solid var(--green-500);
+  border-radius: 6px;
+  transition: var(--transition);
+  animation: fadeInUp 0.5s ease-out;
 }
 
-/* Dropzone */
-.upload-area {
-  border: 2px dashed var(--border);
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
-  margin-bottom: 0.75rem;
-}
-.upload-area:hover,
-.upload-area.dragging {
-  border-color: var(--green-500);
-  background: rgba(58, 158, 95, 0.05);
-}
-.upload-area.has-preview {
-  border-style: solid;
-  cursor: default;
+.insights-list li:nth-child(2) {
+  animation-delay: 0.1s;
 }
 
-.upload-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  padding: 2.5rem 1rem;
-  text-align: center;
-  height: 70vh;
+.insights-list li:nth-child(3) {
+  animation-delay: 0.2s;
 }
-.upload-icon { color: var(--green-500); margin-bottom: 0.25rem; }
-.upload-label { font-size: 0.9rem; font-weight: 500; color: var(--text); }
-.upload-sub { font-size: 0.8rem; color: var(--muted); }
-.upload-hint { font-size: 0.72rem; color: var(--border); margin-top: 0.15rem; }
 
-.preview-wrapper { position: relative; }
-.image-preview {
-  width: 100%; border-radius: calc(var(--radius) - 2px);
-  max-height: 220px; object-fit: cover; display: block;
+.insights-list li:hover {
+  background: rgba(58, 158, 95, 0.15);
+  transform: translateX(4px);
+  border-left-color: var(--green-300);
 }
-.clear-btn {
-  position: absolute; top: 0.5rem; right: 0.5rem;
-  background: rgba(0,0,0,0.6); border: none;
-  color: white; border-radius: 50%;
-  width: 24px; height: 24px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: background 0.2s;
-}
-.clear-btn:hover { background: var(--red); }
 
-/* Analyze button with icon */
-.analyze-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
+/* ── Loading States ── */
+.loading-skeleton {
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface-light) 50%, var(--surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Responsive ── */
+@media (max-width: 900px) {
+  .app {
+    padding: 1.5rem 1rem;
+  }
+
+  .app-header {
+    margin-bottom: 2rem;
+  }
+
+  .logo-text {
+    font-size: 1.6rem;
+  }
+
+  .temperature {
+    font-size: 2.5rem;
+  }
+
+  .weather-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tree-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .forecast-day {
+    min-width: 80px;
+    padding: 0.75rem 0.85rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .app {
+    padding: 1rem 0.75rem;
+  }
+
+  .app-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .logo-text {
+    font-size: 1.4rem;
+  }
+
+  .tagline {
+    font-size: 0.85rem;
+  }
+
+  .coord-form {
+    flex-direction: column;
+  }
+
+  .coord-form input,
+  .coord-form button {
+    width: 100%;
+  }
+
+  .auto-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card {
+    padding: 1.25rem;
+    border-radius: var(--radius);
+  }
+
+  .current-weather {
+    gap: 1rem;
+  }
+
+  .weather-icon-lg {
+    font-size: 3.5rem;
+  }
+
+  .temperature {
+    font-size: 2rem;
+  }
+
+  .weather-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .stat {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+  }
+
+  .stat-value {
+    font-size: 0.95rem;
+  }
+
+  .location-tag {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  .card-header {
+    flex-wrap: wrap;
+  }
+
+  .tree-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .tree-stat-value {
+    font-size: 1.6rem;
+  }
+
+  .forecast-day {
+    min-width: 75px;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .insight-banner {
+    padding: 1.25rem;
+  }
+
+  .insights-list li {
+    font-size: 0.9rem;
+  }
 }
