@@ -6,7 +6,7 @@ const LocationSearch = ({ lat, lon, setLat, setLon, onSearch, onAutoDetect, load
         onSearch();
     };
   return (
-    <search className="location-search">
+    <section className="location-search">
         <form className="coord-form" onSubmit={handleSubmit}>
             <input 
                 type="number" 
@@ -24,16 +24,16 @@ const LocationSearch = ({ lat, lon, setLat, setLon, onSearch, onAutoDetect, load
                 onChange={e => setLon(e.target.value)}
                 required
             />
-            <button type="submit" disabled={loading}>
+            <button type="submit" className="btn-primary" disabled={loading}>
                 {loading ? 'Loading...' : 'Get Weather'}
             </button>
         </form>
         
-        <button className="auto-btn" onClick={onAutoDetect} disabled={loading}>
+        <button className="btn-ghost" onClick={onAutoDetect} disabled={loading}>
             <Pin size={16} /> Auto-detect my location 
         </button>
         {error && <p className="error">{error}</p>}
-    </search>
+    </section>
   )
 }
 
